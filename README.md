@@ -5,6 +5,7 @@ Users can download a *Userscript* to add functionality to the site.
 
 - [FEATURES](#features)
 - [INSTALL](#install)
+- [KNOWN ISSUES](#known-issues)
 - [COPYRIGHT](#copyright)
 
 ## FEATURES
@@ -13,6 +14,12 @@ Users can download a *Userscript* to add functionality to the site.
 
 - Improve styles for large screen displays (bigger than 1280px).
 
+### Planned Features (Coming Soon-ish)
+
+- Infinite scrolling on product listing pages.
+
+- Variant cover picker for pull lists.
+
 ## INSTALL
 
 Install the [userscript][] to get the most out of
@@ -20,6 +27,11 @@ Install the [userscript][] to get the most out of
 
 Tested on Chrome and Firefox (Firefox requires [Greasemonkey][], and
 [Tampermonkey][] is recommended for Chrome).
+
+## KNOWN ISSUES
+
+- Product listing pages for collectables/toys will be blank if the option
+  "Show New #1s" is checked.
 
 ## COPYRIGHT
 
