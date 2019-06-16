@@ -2,8 +2,8 @@
 // @name          discobolus
 // @author        Jeremie Jarosh
 // @namespace     http://trejeraos.com/
-// @description   A third party add-on for the web site dcbservice.com
-// @version       0.1.2
+// @description   A third party add-on for the website dcbservice.com
+// @version       0.1.3a
 // @include       http://dcbservice.com/*
 // @include       http://www.dcbservice.com/*
 // @include       https://dcbservice.com/*

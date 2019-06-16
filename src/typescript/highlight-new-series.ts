@@ -1,8 +1,8 @@
-export function highlightNewIssues() {
+export function highlightNewSeries() {
     // TODO: apply to `TextView` as well
 
     document.querySelectorAll("ul.thumblist").forEach((thumbList) => {
-        thumbList.classList.add("highlight-new-issues")
+        thumbList.classList.add("highlight-new-series")
     })
 
     document.querySelectorAll("ul.thumblist li").forEach(function (item) {
@@ -22,7 +22,7 @@ export function highlightNewIssues() {
         if (issueNumbers.length >= 1) {
             console.debug(issueNumbers)
             console.log("Found new comic: " + comicTitle)
-            item.classList.add("new-issue")
+            item.classList.add("new-series")
         } else {
             console.warn("Hide existing series: " + comicTitle)
             item.classList.add("existing-series")

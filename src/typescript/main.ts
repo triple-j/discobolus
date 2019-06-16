@@ -1,10 +1,10 @@
 import { sayHello } from "./greet";
-import { highlightNewIssues } from "./highlight-new-issues";
+import { highlightNewSeries } from "./highlight-new-series";
 
 console.log(sayHello("TypeScript"));
 
 declare global {
-    interface Window { highlightNewIssues: any; }
+    interface Window { highlightNewSeries: any; }
 }
 
-window.highlightNewIssues = highlightNewIssues;
+window.highlightNewSeries = highlightNewSeries;
