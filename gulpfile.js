@@ -16,6 +16,7 @@ var path = require('path');
 var dataTags = require('./gulp/gulp-data-tags')
 
 //START: Settings
+var userscript = "./src/discobolus.user.js";
 var distFolder = "./dist/";
 var watchFiles = [
     "./src/**/*.ts",
@@ -57,7 +58,7 @@ gulp.task("dist-typescript", function () {
 });
 
 gulp.task("dist-data-tags", function () {
-    return gulp.src("./src/userscript.js")
+    return gulp.src(userscript)
         .pipe(dataTags({cwd: path.join(__dirname, "src")}))
         .pipe(gulp.dest(distFolder));
 });

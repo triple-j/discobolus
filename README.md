@@ -25,6 +25,6 @@ Tested on Chrome and Firefox (Firefox requires [Greasemonkey][], and
 **discobolus** is released into the public domain by the copyright holders.
 
 [dcbservice.com]: https://dcbservice.com
-[userscript]: https://cdn.jsdelivr.net/gh/triple-j/discobolus/dist/userscript.js
+[userscript]: https://github.com/triple-j/discobolus/raw/master/dist/discobolus.user.js
 [Greasemonkey]: http://www.greasespot.net/
 [Tampermonkey]: http://tampermonkey.net/
