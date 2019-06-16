@@ -1,11 +1,30 @@
 # discobolus
 
-A third party add-on for the website [dcbservice.com][]
+A third party add-on for the website [dcbservice.com][]. Users can download a
+*Userscript* to add functionality to the site.
 
+- [FEATURES](#features)
+- [INSTALL](#install)
 - [COPYRIGHT](#copyright)
+
+## FEATURES
+
+- Allow only new series to show on product listing pages.
+
+- Improve styles for large screen displays (bigger than 1280px).
+
+## INSTALL
+
+Install the [userscript][] to get the most out of [dcbservice.com][].
+
+Tested on Chrome and Firefox (Firefox requires [Greasemonkey][], and
+[Tampermonkey][] is recommended for Chrome).
 
 ## COPYRIGHT
 
 **discobolus** is released into the public domain by the copyright holders.
 
 [dcbservice.com]: https://dcbservice.com
+[userscript]: https://cdn.jsdelivr.net/gh/triple-j/discobolus/dist/userscript.js
+[Greasemonkey]: http://www.greasespot.net/
+[Tampermonkey]: http://tampermonkey.net/
