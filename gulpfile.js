@@ -20,6 +20,7 @@ var userscript = "./src/discobolus.user.js";
 var distFolder = "./dist/";
 var watchFiles = [
     "./src/**/*.ts",
+    "./src/**/*.tsx",
     "./src/**/*.less",
     "./src/**/*.js",
 ];
