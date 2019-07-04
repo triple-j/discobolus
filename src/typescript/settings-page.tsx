@@ -1,3 +1,50 @@
+import { h, render, Component } from 'preact'
+import { Clock } from './Clock'
+import { renderElement } from './render-element'
+
+interface SubSectionProps {
+    title: string
+    children?: any
+}
+
+class SubSection extends Component<SubSectionProps, any> {
+    render (props: SubSectionProps) {
+        return (
+            <div class="subsection">
+                <h4>{props.title}</h4>
+                <div class="rule compact"></div>
+                {props.children}
+            </div>
+        )
+    }
+}
+
+interface SettingsProps {
+    title: string
+    element: HTMLElement
+}
+
+class Settings extends Component<any, any> {
+    render (props: any) {
+        return (
+            <div class="userscript-settings-app">
+                <h2>Userscript Settings</h2>
+                <div class="section">
+                    <SubSection title="Testing">
+                        This is only a test.
+                    </SubSection>
+
+                    <SubSection title="Clock">
+                        <Clock />
+                    </SubSection>
+                </div>
+            </div>
+        )
+    }
+}
+
+
+
 export class SettingsPage {
     settingsPageElm: HTMLElement
     originalPageElm: HTMLElement
@@ -7,7 +54,7 @@ export class SettingsPage {
         if ( location.pathname.startsWith("/account") ) {
             this.addLink()
 
-            this.settingsPageElm = this.buildPage()
+            this.settingsPageElm = renderElement(<div class="rightcol userscript-settings-page hidden"></div>)
             this.originalPageElm = document.querySelector(".content-wrapper .rightcol")
 
             this.originalPageElm.classList.add("original-account-page")
@@ -21,6 +68,8 @@ export class SettingsPage {
                     this.show(false)
                 }
             })
+
+            render(<Settings />, this.settingsPageElm)
         }
     }
 
@@ -46,50 +95,18 @@ export class SettingsPage {
         let logoffLink = document.querySelector(".sidemenu .navmenu a[href='/account/logoff']")
 
         if ( logoffLink && !this.settingsItem ) {
-            let separator = document.createElement("li")
-            separator.classList.add("separator")
+            let separator = renderElement(
+                <li class="separator"></li>
+            )
 
-            this.settingsItem = document.createElement("li")
-            this.settingsItem.classList.add("userscript-settings-link")
-
-            let settingsLink = document.createElement("a")
-            settingsLink.setAttribute("href", "#userscript-settings")
-            settingsLink.innerHTML = "Userscript Settings"
-            this.settingsItem.appendChild(settingsLink)
+            this.settingsItem = renderElement(
+                <li class="userscript-settings-link">
+                    <a href="#userscript-settings">Userscript Settings</a>
+                </li>
+            )
 
             logoffLink.parentElement.insertAdjacentElement("beforebegin", this.settingsItem)
             this.settingsItem.insertAdjacentElement("afterend", separator)
         }
-    }
-
-    private buildPage(): HTMLElement {
-        let root = document.createElement("div")
-        root.classList.add("rightcol")
-        root.classList.add("userscript-settings-page")
-        root.classList.add("hidden")
-
-        let title = document.createElement("h2")
-        title.innerHTML = "Userscript Settings Page"
-        root.appendChild(title)
-
-        let body = document.createElement("div")
-        body.classList.add("section")
-        root.appendChild(body)
-
-        let subSection = document.createElement("div")
-        subSection.classList.add("subsection")
-        let subSectionTitle = document.createElement("h4")
-        subSection.appendChild(subSectionTitle)
-        let subSectionHRule = document.createElement("div")
-        subSectionHRule.classList.add("rule")
-        subSectionHRule.classList.add("compact")
-        subSection.appendChild(subSectionHRule)
-
-        let testSection = <HTMLElement>subSection.cloneNode(true)
-        testSection.querySelector("h4").innerHTML = "Testing"
-        testSection.insertAdjacentText("beforeend", "This is only a test")
-        body.appendChild(testSection)
-
-        return root
     }
 }
