@@ -7,6 +7,10 @@ interface OrderStatus {
     total: number
 }
 
+interface OrderStatusEvent extends OrderStatus {
+    link: string
+}
+
 export class OrderHistoryStatus {
 
     constructor() {
@@ -69,5 +73,22 @@ export class OrderHistoryStatus {
 
                 return totals
             })
+    }
+
+    queryOrders() {
+        let orderLinks = Array.from(
+                document.querySelectorAll("a[href*='/account/order/'")
+            ).map(elm => elm.getAttribute("href"))
+
+        orderLinks.forEach(link => {
+            this.getStatus(link)
+                .then(status => {
+                    let eventDetails: OrderStatusEvent = Object.assign({link: link}, status)
+                    let statusEvent = new CustomEvent("order-status", {
+                        detail: eventDetails
+                    })
+                    document.dispatchEvent(statusEvent)
+                })
+        })
     }
 }
