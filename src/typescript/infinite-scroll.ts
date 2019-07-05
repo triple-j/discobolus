@@ -1,4 +1,4 @@
-import { getPageDom, isInViewport } from "./helpers"
+import { debounce, getPageDom, isInViewport } from "./helpers"
 
 interface PageHrefs {
     [key: number]: string
@@ -10,6 +10,7 @@ export class InfiniteScroll {
     pageHrefs: PageHrefs = {}
     thumbList: HTMLElement
     loadingElm: HTMLElement
+    debounceQueryMoreItems: Function
 
     constructor() {
         this.thumbList = document.querySelector(".thumblist")
@@ -19,6 +20,9 @@ export class InfiniteScroll {
             && pager
             && pager.querySelector(".page.current").textContent === "1"
         )
+
+        this.debounceQueryMoreItems = debounce(this.queryMoreItems.bind(this), 250)
+
         if ( this.enabled && isOnValidPage ) {
             document.querySelector(".discobolus").classList.add("infinite-scroll")
 
@@ -36,29 +40,16 @@ export class InfiniteScroll {
             this.thumbList.insertAdjacentElement("afterend", this.loadingElm)
 
             this.queryMoreItems()
-            let ticking = false;
             window.addEventListener('scroll', (event) => {
-                if (!ticking) {
-                    // Since scroll events can fire at a high rate, the event
-                    // handler shouldn't execute computationally expensive
-                    // operations such as DOM modifications. Instead, it is
-                    // recommended to throttle the event.
-                    window.requestAnimationFrame(() => {
-                        //console.debug("Trigger check for more items.")
-                        this.queryMoreItems()
-                        ticking = false;
-                    });
-
-                    ticking = true;
-                }
+                //console.debug("Trigger check for more items.")
+                this.debounceQueryMoreItems()
             })
-
             // incase the loading element becomes visible do to other features (eg. Highlight New Series)
             let observer = new MutationObserver((mutationsList, observer) => {
                 console.debug("mutation event", mutationsList, observer)
-                this.queryMoreItems()
+                this.debounceQueryMoreItems()
             })
-            observer.observe(this.thumbList, { attributes: true, childList: true, subtree: true });
+            observer.observe(this.thumbList, { attributes: true, childList: true, subtree: true })
         }
     }
 
