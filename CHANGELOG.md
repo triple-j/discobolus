@@ -12,6 +12,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 - Show status totals in Order History.
 
+- Infinite scrolling on product listing pages.
+
 ### Changed in Unreleased
 
 ### Fixed in Unreleased

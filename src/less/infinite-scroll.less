@@ -1,0 +1,53 @@
+.discobolus.infinite-scroll {
+    ul.pager {
+        visibility: hidden;
+    }
+
+    .infinite-scroll-loading {
+        clear: both;
+        position: relative;
+        height: 2.5em;
+        box-sizing: border-box;
+        text-align: center;
+
+        background-color: #161c2a;
+        border: 1px solid #000;
+        color: white;
+        margin: 0px;
+        padding: 3px;
+
+        transition: opacity 0.3s ease-in-out;
+        opacity: 0;
+
+        &::after {
+            content: " ";
+            position: absolute;
+            line-height: 1em;
+            top: 0.75em;
+            left: 0px;
+            right: 0px;
+        }
+
+        &.active {
+            opacity: 1;
+
+            &::after {
+                content: "Loading…";
+                animation: pulsate 3s ease-out infinite;
+                opacity: 0.5;
+            }
+        }
+    }
+}
+
+@keyframes pulsate {
+    0% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1.0;
+    }
+    100% {
+        opacity: 0.5;
+    }
+}

@@ -16,9 +16,9 @@ Users can download a *Userscript* to add functionality to the site.
 
 - Show status totals in Order History.
 
-### Planned Features (Coming Soon-ish)
-
 - Infinite scrolling on product listing pages.
+
+### Planned Features (Coming Soon-ish)
 
 - Variant cover picker for pull lists.
 
