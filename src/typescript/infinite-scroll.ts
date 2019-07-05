@@ -22,13 +22,14 @@ export class InfiniteScroll {
         if ( this.enabled && isOnValidPage ) {
             document.querySelector(".discobolus").classList.add("infinite-scroll")
 
-            Array.from(
-                pager.querySelectorAll(".page a")
-            ).forEach(elm => {
-                let idx = parseInt(elm.textContent)
-                let href = elm.getAttribute("href")
-                this.pageHrefs[idx] = href
-            })
+            let pagePath = location.pathname
+            let lastPageElm = Array.from(pager.querySelectorAll(".page a")).pop()
+            if ( lastPageElm ) {
+                let lastPage = parseInt(lastPageElm.textContent)
+                for ( let idx = 2; idx <= lastPage; idx++ ) {
+                    this.pageHrefs[idx] = `${pagePath}/${idx}`
+                }
+            }
 
             this.loadingElm = document.createElement("div")
             this.loadingElm.classList.add("infinite-scroll-loading")
