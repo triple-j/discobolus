@@ -18,7 +18,7 @@ export class InfiniteScroll {
         let isOnValidPage = Boolean(
             this.thumbList
             && pager
-            && pager.querySelector(".page.current").textContent === "1"
+            && (pager.querySelector(".page.current") || {textContent:undefined}).textContent === "1"
         )
 
         this.debounceQueryMoreItems = debounce(this.queryMoreItems.bind(this), 250)
