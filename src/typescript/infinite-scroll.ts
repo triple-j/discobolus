@@ -52,6 +52,13 @@ export class InfiniteScroll {
                     ticking = true;
                 }
             })
+
+            // incase the loading element becomes visible do to other features (eg. Highlight New Series)
+            let observer = new MutationObserver((mutationsList, observer) => {
+                console.debug("mutation event", mutationsList, observer)
+                this.queryMoreItems()
+            })
+            observer.observe(this.thumbList, { attributes: true, childList: true, subtree: true });
         }
     }
 
