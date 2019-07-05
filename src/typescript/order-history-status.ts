@@ -1,3 +1,4 @@
+import { getPageDom } from "./helpers"
 import { addToHeaderRow, addToRow } from "./order-history-status-components"
 
 export interface OrderStatus {
@@ -44,20 +45,8 @@ export class OrderHistoryStatus {
     }
 
     getStatus( orderUrl: string ): Promise<OrderStatus> {
-        let init: RequestInit = {
-            credentials: "same-origin"
-        }
-
-        return fetch( orderUrl, init )
-            .then(( response ) => {
-                if ( !response.ok ) {
-                    throw new Error(`HTTP error, status = ${response.status}`)
-                }
-
-                return response.text()
-            })
-            .then(( responseText ) => {
-                let responseDom = (new DOMParser()).parseFromString(responseText, "text/html")
+        return getPageDom( orderUrl )
+            .then(( responseDom ) => {
                 let productRows = Array.from(responseDom.querySelectorAll(".carttable input.cartqty")).map(( elm ) => {
                     while ( elm.parentElement && elm.tagName !== "TR" ) {
                         elm = elm.parentElement
