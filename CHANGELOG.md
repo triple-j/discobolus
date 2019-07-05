@@ -10,6 +10,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Added in Unreleased
 
+- Show status totals in Order History.
+
 ### Changed in Unreleased
 
 ### Fixed in Unreleased

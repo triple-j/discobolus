@@ -14,6 +14,8 @@ Users can download a *Userscript* to add functionality to the site.
 
 - Improve styles for large screen displays (bigger than 1280px).
 
+- Show status totals in Order History.
+
 ### Planned Features (Coming Soon-ish)
 
 - Infinite scrolling on product listing pages.

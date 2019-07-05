@@ -1,5 +1,6 @@
+import { addToHeaderRow, addToRow } from "./order-history-status-components"
 
-interface OrderStatus {
+export interface OrderStatus {
     processing: number
     filled: number
     shipped: number
@@ -7,15 +8,38 @@ interface OrderStatus {
     total: number
 }
 
-interface OrderStatusEvent extends OrderStatus {
+export interface OrderStatusEventDetails extends OrderStatus {
     link: string
+}
+
+export interface OrderStatusEvent extends CustomEvent {
+    detail: OrderStatusEventDetails
 }
 
 export class OrderHistoryStatus {
 
     constructor() {
         if ( location.pathname === "/account/orders" ) {
-            //pass
+            let headerRow: HTMLElement = document.querySelector(".carttable tr")
+            let orderAnchors = Array.from(
+                document.querySelectorAll("a[href*='/account/order/'")
+            )
+
+            addToHeaderRow(headerRow)
+
+            orderAnchors.forEach(orderAnchor => {
+                let href = orderAnchor.getAttribute("href")
+                let orderRow = orderAnchor.parentElement
+                while ( orderRow.tagName !== "TR" && orderRow ) {
+                    orderRow = orderRow.parentElement
+                }
+
+                if ( orderRow ) {
+                    addToRow(orderRow, href)
+                }
+            })
+
+            this.queryOrders()
         }
     }
 
@@ -83,7 +107,7 @@ export class OrderHistoryStatus {
         orderLinks.forEach(link => {
             this.getStatus(link)
                 .then(status => {
-                    let eventDetails: OrderStatusEvent = Object.assign({link: link}, status)
+                    let eventDetails: OrderStatusEventDetails = Object.assign({link: link}, status)
                     let statusEvent = new CustomEvent("order-status", {
                         detail: eventDetails
                     })

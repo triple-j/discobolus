@@ -1,0 +1,17 @@
+.discobolus {
+    .orderlist {
+        .order-status {
+            & > span {
+                &::before {
+                    content: "/";
+                    padding: 0 0.2em;
+                    opacity: 0.5;
+                }
+
+                &:first-child::before {
+                    content: "";
+                }
+            }
+        }
+    }
+}
