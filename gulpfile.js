@@ -3,7 +3,6 @@ var gulp = require("gulp");
 var sourcemaps = require('gulp-sourcemaps');
 
 var ts = require("gulp-typescript");
-var tsProject = ts.createProject("tsconfig.json");
 var browserify = require("browserify");
 var source = require('vinyl-source-stream');
 var tsify = require("tsify");
@@ -20,12 +19,13 @@ var userscript = "./src/discobolus.user.js";
 var distFolder = "./dist/";
 var watchFiles = [
     "./src/**/*.ts",
+    "./src/**/*.tsx",
     "./src/**/*.less",
     "./src/**/*.js",
 ];
 //END: Settings
 
-gulp.task("dist-less", function () {
+gulp.task("dev-less", function () {
     return gulp.src("./src/less/main.less")
         .pipe(sourcemaps.init())
         .pipe(less())
@@ -33,21 +33,18 @@ gulp.task("dist-less", function () {
         .pipe(gulp.dest(distFolder));
 });
 
-gulp.task("dist-typescript", function () {
-    //return tsProject.src()
-    //    .pipe(tsProject())
-    //    .js.pipe(gulp.dest(distFolder));
+gulp.task("dev-typescript", function () {
     return browserify({
         basedir: '.',
         debug: true,
         entries: ['src/typescript/main.ts'],
         cache: {},
-        packageCache: {}
+        packageCache: {},
     })
         .plugin(tsify)
         .transform('babelify', {
             presets: ['es2015'],
-            extensions: ['.ts']
+            extensions: ['.ts'],
         })
         .bundle()
         .pipe(source('main.js'))
@@ -57,16 +54,49 @@ gulp.task("dist-typescript", function () {
         .pipe(gulp.dest("dist"));
 });
 
+gulp.task("dist-less", function () {
+    return gulp.src("./src/less/main.less")
+        .pipe(less())
+        .pipe(gulp.dest(distFolder));
+});
+
+gulp.task("dist-typescript", function () {
+    return browserify({
+        basedir: '.',
+        debug: false,
+        entries: ['src/typescript/main.ts'],
+        cache: {},
+        packageCache: {},
+    })
+        .plugin(tsify)
+        .transform('babelify', {
+            presets: ['es2015'],
+            extensions: ['.ts'],
+        })
+        .bundle()
+        .pipe(source('main.js'))
+        .pipe(buffer())
+        .pipe(gulp.dest("dist"));
+});
+
 gulp.task("dist-data-tags", function () {
     return gulp.src(userscript)
         .pipe(dataTags({cwd: path.join(__dirname, "src")}))
         .pipe(gulp.dest(distFolder));
 });
 
+gulp.task("dev", gulp.series(
+    gulp.parallel(
+        "dev-less",
+        "dev-typescript",
+    ),
+    "dist-data-tags"
+));
+
 gulp.task("dist", gulp.series(
     gulp.parallel(
         "dist-less",
-        "dist-typescript"
+        "dist-typescript",
     ),
     "dist-data-tags"
 ));

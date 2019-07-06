@@ -4,6 +4,8 @@
     ],
     "compilerOptions": {
         "noImplicitAny": true,
+        "jsx": "react",
+        "jsxFactory": "h",
         "target": "es2015"
     }
 }

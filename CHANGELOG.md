@@ -20,6 +20,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 -------------------------------------------------------------------------------
 
+## 0.1.4  (2019-07-06)
+
+### Added in 0.1.4
+
+- Show status totals in Order History.
+
+- Infinite scrolling on product listing pages.
+
+-------------------------------------------------------------------------------
+
 ## 0.1.3  (2019-06-16)
 
 ### Added in 0.1.3

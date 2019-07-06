@@ -14,11 +14,15 @@ Users can download a *Userscript* to add functionality to the site.
 
 - Improve styles for large screen displays (bigger than 1280px).
 
-### Planned Features (Coming Soon-ish)
+- Show status totals in Order History.
 
 - Infinite scrolling on product listing pages.
 
+### Planned Features (Coming Soon-ish)
+
 - Variant cover picker for pull lists.
+
+- Settings page to configure features.
 
 ## INSTALL
 
