@@ -3,7 +3,7 @@
 // @author        Jeremie Jarosh
 // @namespace     http://trejeraos.com/
 // @description   A third party add-on for the website dcbservice.com
-// @version       0.1.4a
+// @version       0.1.5a
 // @include       http://dcbservice.com/*
 // @include       http://www.dcbservice.com/*
 // @include       https://dcbservice.com/*

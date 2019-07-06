@@ -22,6 +22,8 @@ Users can download a *Userscript* to add functionality to the site.
 
 - Variant cover picker for pull lists.
 
+- Settings page to configure features.
+
 ## INSTALL
 
 Install the [userscript][] to get the most out of

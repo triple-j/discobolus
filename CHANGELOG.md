@@ -10,10 +10,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ### Added in Unreleased
 
-- Show status totals in Order History.
-
-- Infinite scrolling on product listing pages.
-
 ### Changed in Unreleased
 
 ### Fixed in Unreleased
@@ -21,6 +17,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 ### Removed in Unreleased
 
 ### Hotfixed in Unreleased
+
+-------------------------------------------------------------------------------
+
+## 0.1.4  (2019-07-06)
+
+### Added in 0.1.4
+
+- Show status totals in Order History.
+
+- Infinite scrolling on product listing pages.
 
 -------------------------------------------------------------------------------
 
