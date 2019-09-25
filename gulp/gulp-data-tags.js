@@ -9,11 +9,18 @@ const PLUGIN_NAME = 'gulp-data-tags';
  * Replace `{{data:.*}}` tags with data-urls
  * @param {string} text - text to search through
  * @param {string} base - base path for relative fileSize
- * @param {boolean} recursive - recursively search file (1 deep)
+ * @param {boolean} [recursive=false] - recursively search file
+ * @param {Array.<string>} [whitelistExt=[".html",".js",".css"]] - extensions to
+ *      recursively search
  * @return {string}
  */
-function replaceDataTags(text, base, recursive) {
-    recursive = recursive || false
+function replaceDataTags(text, base, recursive, whitelistExts) {
+    recursive = recursive || false;
+    whitelistExts = whitelistExts || [
+        ".html",
+        ".js",
+        ".css",
+    ];
     var tagMatches = text.match(/{{data:.*}}/gi) || [];
     var reFilePath = /{{data:.*;file,(.*)}}/i;
 
@@ -26,11 +33,17 @@ function replaceDataTags(text, base, recursive) {
 
         if (dataMatches !== null) {
             filePath = path.join(base, dataMatches[1]);
+            fileExt = path.extname(filePath).toLowerCase();
 
             // create data-url
             fileBuffer = fs.readFileSync(filePath);
-            if (recursive) {
-                fileBuffer = new Buffer(replaceDataTags(fileBuffer.toString(), filePath.replace(/(.*[\/\\]).*/, "$1"), false))
+            if (recursive && whitelistExts.includes(fileExt)) {
+                fileBuffer = new Buffer(replaceDataTags(
+                    fileBuffer.toString(),
+                    filePath.replace(/(.*[\/\\]).*/, "$1"),
+                    true,
+                    whitelistExts
+                ));
             }
             base64 = fileBuffer.toString('base64');
             dataUrl = dataUrl.replace(/file,(.*)$/, "base64," + base64);
@@ -61,7 +74,7 @@ function gulpDataTags(options) {
             //this.emit('error', new PluginError("gulp-data-tags", 'Buffers not supported!'));
 
             text = file.contents.toString(encoding);
-            text = replaceDataTags(text, base, true);
+            text = replaceDataTags(text, base, options.recursive, options.whitelistExts);
 
             file.contents = new Buffer(text, encoding);
         }
