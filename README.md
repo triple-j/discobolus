@@ -30,7 +30,7 @@ Install the [userscript][] to get the most out of
 [Discount Comic Book Service (DCBS)][DCBS].
 
 Tested on Chrome and Firefox (Firefox requires [Greasemonkey][], and
-[Tampermonkey][] is recommended for Chrome).
+[Violentmonkey][] is recommended for Chrome).
 
 ## KNOWN ISSUES
 
@@ -44,4 +44,4 @@ Tested on Chrome and Firefox (Firefox requires [Greasemonkey][], and
 [DCBS]: https://dcbservice.com
 [userscript]: https://github.com/triple-j/discobolus/raw/master/dist/discobolus.user.js
 [Greasemonkey]: http://www.greasespot.net/
-[Tampermonkey]: http://tampermonkey.net/
+[Violentmonkey]: https://violentmonkey.github.io/
